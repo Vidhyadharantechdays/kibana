@@ -9,6 +9,8 @@ Kibana is an open source ([Apache Licensed](https://github.com/elastic/kibana/bl
 - Elasticsearch version 1.4.4 or later
 - Kibana binary package
 
+## Development mode
+   grunt dev --verbose
 ## Installation
 
 * Download: [http://www.elastic.co/downloads/kibana](http://www.elastic.co/downloads/kibana)
