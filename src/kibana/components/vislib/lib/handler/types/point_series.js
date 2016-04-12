@@ -20,7 +20,23 @@ define(function (require) {
       return function (vis) {
         var isUserDefinedYAxis = vis._attr.setYExtents;
         var data;
-
+        /*
+         * check if xAxisLabel && yAxisLabel are not null
+         * copy the vis._attr.xAxisLabel and vis._attr.yAxisLabel to
+         * vis.data.xAxisLable and vis.data.yAxisLable
+         */
+        for (var key in vis._attr) {
+          if (vis._attr.hasOwnProperty(key)) {
+            switch (key) {
+              case 'xAxisLabel':
+                vis.data.xAxisLabel = vis._attr[key];
+                break;
+              case 'yAxisLabel':
+                vis.data.yAxisLabel = vis._attr[key];
+                break;
+            }
+          }
+        }
         if (opts.zeroFill) {
           data = new Data(injectZeros(vis.data), vis._attr);
         } else {

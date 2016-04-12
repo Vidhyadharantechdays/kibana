@@ -60,7 +60,6 @@ define(function (require) {
     YAxis.prototype._getExtents = function (domain) {
       var min = domain[0];
       var max = domain[1];
-
       if (this._isUserDefined()) return this._validateUserExtents(domain);
       if (this._isYExtents()) return domain;
       if (this._attr.scale === 'log') return this._logDomain(min, max); // Negative values cannot be displayed with a log scale.
@@ -106,6 +105,23 @@ define(function (require) {
     };
 
     /**
+     * Remove the decimal point in the y-axis
+     * @param {type} domain min and max as array
+     * @returns {Array} - converted min and max
+     */
+    YAxis.prototype._convertDomain = function (domain) {
+      var min = domain[0];
+      var max = domain[1];
+      var MAX_VALUE = 10;
+      var diff = max - min;
+      if (diff < MAX_VALUE) {
+        var actualDif = MAX_VALUE - diff;
+        max += actualDif;
+      }
+      return [min, max];
+    };
+
+    /**
      * Creates the d3 y scale function
      *
      * @method getYScale
@@ -116,6 +132,7 @@ define(function (require) {
       var scale = this._getScaleType(this._attr.scale);
       var domain = this._getExtents(this.domain);
 
+      domain = this._convertDomain(domain);
       this.yScale = scale
       .domain(domain)
       .range([height, 0]);

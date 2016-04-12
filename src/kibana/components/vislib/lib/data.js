@@ -39,6 +39,7 @@ define(function (require) {
       this.type = this.getDataType();
 
       this.labels;
+      this.customcolors = attr.setColors || [];
 
       if (this.type === 'series') {
         if (getLabels(data).length === 1 && getLabels(data)[0] === '') {
@@ -50,7 +51,7 @@ define(function (require) {
         this.labels = this.pieNames();
       }
 
-      this.color = this.labels ? color(this.labels) : undefined;
+      this.color = this.labels ? color(this.labels, this.customcolors) : undefined;
 
       this._normalizeOrdered();
 
@@ -592,7 +593,7 @@ define(function (require) {
      * @returns {Function} Performs lookup on string and returns hex color
      */
     Data.prototype.getColorFunc = function () {
-      return color(this.getLabels());
+      return color(this.getLabels(), this.customcolors);
     };
 
     /**
@@ -602,7 +603,7 @@ define(function (require) {
      * @returns {Function} Performs lookup on string and returns hex color
      */
     Data.prototype.getPieColorFunc = function () {
-      return color(this.pieNames());
+      return color(this.pieNames(), this.customcolors);
     };
 
     /**

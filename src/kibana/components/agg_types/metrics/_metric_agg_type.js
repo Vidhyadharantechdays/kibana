@@ -37,6 +37,12 @@ define(function (require) {
       var field = agg.field();
       return field ? field.format : fieldFormats.getDefaultInstance('number');
     };
+    
+    /**
+     * Specify if this metric aggregation may be used in orderBy clauses of sub-aggs
+     * @type {boolean}
+     */
+    MetricAggType.prototype.supportsOrderBy = true;
 
     return MetricAggType;
   };

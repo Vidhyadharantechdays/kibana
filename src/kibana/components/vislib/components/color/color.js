@@ -11,7 +11,7 @@ define(function (require) {
      * and returns a hex color associated with that value.
      */
 
-    return function (arrayOfStringsOrNumbers) {
+    return function (arrayOfStringsOrNumbers, arrayOfColors) {
       if (!_.isArray(arrayOfStringsOrNumbers)) {
         throw new Error('ColorUtil expects an array');
       }
@@ -23,7 +23,7 @@ define(function (require) {
       });
 
       var arrayLength = arrayOfStringsOrNumbers.length;
-      var colorObj = _.zipObject(arrayOfStringsOrNumbers, createColorPalette(arrayLength));
+      var colorObj = _.zipObject(arrayOfStringsOrNumbers, createColorPalette(arrayLength, arrayOfColors));
 
       return function (value) {
         return colorObj[value];

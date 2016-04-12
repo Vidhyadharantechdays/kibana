@@ -232,7 +232,7 @@ define(function (require) {
    */
   errors.NoResults = function NoResults() {
     KbnError.call(this,
-    'No results found',
+    'No results displayed because all values equal 0',
     errors.NoResults);
   };
   inherits(errors.NoResults, KbnError);

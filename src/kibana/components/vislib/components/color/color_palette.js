@@ -39,14 +39,13 @@ define(function (require) {
 
     };
 
-    return function (num) {
+    return function (num, arrayOfColors) {
       if (!_.isNumber(num)) {
         throw new TypeError('ColorPaletteUtilService expects a number');
       }
 
-      var colors = seedColors;
-
-      var seedLength = seedColors.length;
+      var colors = _.defaults(arrayOfColors || [], seedColors);
+      var seedLength = colors.length;
 
       _.times(num - seedLength, function (i) {
         colors.push(d3.hsl((fraction(i + seedLength + 1) * 360 + offset) % 360, 0.5, 0.5).toString());
